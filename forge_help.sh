@@ -14,8 +14,9 @@ if [ "$1" == "logs" ] || [ "$1" == "log" ]; then
 		if [[ -f "$mc_folder/logs/latest.log" ]]; then
 			out=$(curl -X POST https://hastebin.com/documents -T "$mc_folder/logs/latest.log")
 			echo
-			echo $out
-			echo Send this Line to the support
+			key=`echo  $out | sed 's/{"key":"//;s/"}//'`
+            		echo "https://hastebin.com/$key"
+			echo Send this link to the support
 			echo
 		else
 			echo Missing latest.log File
@@ -37,9 +38,10 @@ elif [ "$1" == "mods" ] || [ "$1" == "mod" ]; then
         fi
 		out=$(curl -X POST https://hastebin.com/documents -d "$out")
 		echo
-		echo $out
-		echo Send this Line to the support 
-        echo
+		key=`echo  $out | sed 's/{"key":"//;s/"}//'`
+            	echo "https://hastebin.com/$key"
+		echo Send this link to the support
+		echo
 	else
 		echo Missing mods Folder
 	fi
